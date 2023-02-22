@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User detail
+{% endblock %}
+
+{% block body %}
+    <h1>User detail:</h1>
+    <h2>Last name: {{ selected_user['last_name'] }}</h2>
+    <h4>First name: {{ selected_user['first_name'] }}</h4>
+    <h5>Birthday: {{ selected_user['birthday'] }}</h5>
+    <br>
+    <h4>Articles:</h4>
+    {% for articles_id in articles %}
+        {% if articles[articles_id]['author']['name'] == selected_user['last_name'] %}
+            <ul>
+                <li><a href="{{ url_for('articles.get_article', pk=articles_id) }}">
+                    {{ articles[articles_id]['title'] }} | {{ articles[articles_id]['author']['name'] }}</a></li>
+            </ul>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
