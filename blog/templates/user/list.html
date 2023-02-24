@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Users list
+    Users list
 {% endblock %}
 
 {% block body %}
     <h1>Users:</h1>
-    {% for user_id in users %}
+    {% for user in users %}
         <ul>
-            <li><a href="{{ url_for('user.get_user', pk=user_id) }}">{{ users[user_id]['first_name'] }}
-                {{ users[user_id]['last_name'] }}</a></li>
+            <li><a href="{{ url_for('user_app.user_profile', user_id=user.id) }}">{{ user.username -}}</a>
+                {% if user.is_staff %}
+                    <span class="badge bg-secondary">staff</span>
+                {% endif %}
+            </li>
         </ul>
-    {% endfor  %}
+    {% endfor %}
 {% endblock %}

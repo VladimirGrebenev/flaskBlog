@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
+from flask_login import login_required
 
-articles = Blueprint('articles', __name__, static_folder='../static', url_prefix='/articles')
+articles_app = Blueprint('articles_app', __name__, static_folder='../static', url_prefix='/articles')
 
 ARTICLES = {
     1: {
@@ -30,14 +31,17 @@ ARTICLES = {
 }
 
 
-@articles.route('/')
+@articles_app.route('/')
+@login_required
 def articles_list():
     return render_template(
         'articles/list.html',
         articles=ARTICLES,
     )
 
-@articles.route('/<int:pk>')
+
+@articles_app.route('/<int:pk>')
+@login_required
 def get_article(pk: int):
     try:
         article = ARTICLES[pk]
