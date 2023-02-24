@@ -8,7 +8,7 @@
     <h1>Users:</h1>
     {% for user in users %}
         <ul>
-            <li><a href="{{ url_for('user.user_details', user_id=user.id) }}">{{ user.username -}}</a>
+            <li><a href="{{ url_for('user_app.user_profile', user_id=user.id) }}">{{ user.username -}}</a>
                 {% if user.is_staff %}
                     <span class="badge bg-secondary">staff</span>
                 {% endif %}

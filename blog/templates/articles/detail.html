@@ -7,7 +7,7 @@ Article
 {% block body %}
     <h1>Article:</h1>
     <h2>{{ article['title'] }}</h2>
-{#    <a href="{{ url_for('user.get_user', pk=article['author']['id']) }}">#}
+{#    <a href="{{ url_for('user_app.profile', pk=article['author']['id']) }}">#}
         <p class="fw-bold">Author: {{ article['author']['name'] }}</p>
 {#    </a>#}
     <p>{{ article['text'] }}</p>
