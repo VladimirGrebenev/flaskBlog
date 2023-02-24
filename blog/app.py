@@ -1,12 +1,12 @@
 from flask import Flask
+from blog.user.views import user
+from blog.articles.views import articles
 
-app = Flask(__name__)
+def create_app() -> Flask:
+    app = Flask(__name__)
+    register_blueprint(app)
+    return app
 
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello geekbrains!'
-
-
-if __name__ == '__main__':
-    app.run()
+def register_blueprint(app: Flask):
+    app.register_blueprint(user)
+    app.register_blueprint(articles)
