@@ -1,22 +1,40 @@
 from flask import Flask
-from blog.user.views import user_app
-from blog.articles.views import articles_app
-from blog.models.database import db
-from blog.auth.views import login_manager, auth_app
+from blog.extensions import db, login_manager
+from blog.models import User
+from blog import commands
 
 
 def create_app() -> Flask:
     app = Flask(__name__)
+    app.config.from_object('blog.config')
+
+    register_extensions(app)
     register_blueprint(app)
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/blog.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    db.init_app(app)
-    app.config["SECRET_KEY"] = "abcdefg123456"
-    login_manager.init_app(app)
+    register_commands(app)
+
     return app
+
+def register_extensions(app):
+    db.init_app(app)
+    login_manager.login_view = 'auth_app.login'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get
 
 
 def register_blueprint(app: Flask):
+    from blog.user.views import user_app
+    from blog.articles.views import articles_app
+    from blog.auth.views import auth_app
+
     app.register_blueprint(user_app)
     app.register_blueprint(articles_app)
     app.register_blueprint(auth_app, url_prefix="/auth")
+
+
+def register_commands(app: Flask):
+    app.cli.add_command(commands.init_db, 'init-db')
+    app.cli.add_command(commands.create_init_users, 'create-users')
+

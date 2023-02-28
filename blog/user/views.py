@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 # from blog.articles.views import ARTICLES
 from blog.models import User
+from flask_login import login_required
 
 user_app = Blueprint('user_app', __name__, static_folder='../static', url_prefix='/users')
 
@@ -19,6 +20,7 @@ def user_list():
     )
 
 @user_app.route('/<int:user_id>/')
+@login_required
 def user_profile(user_id: int):
     try:
         user = User.query.filter_by(id=user_id).one_or_none()
