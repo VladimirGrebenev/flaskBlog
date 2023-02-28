@@ -6,6 +6,7 @@ load_dotenv()
 
 ENV = os.getenv('FLASK_ENV', default=EnvType.production)
 DEBUG = ENV == EnvType.development
+# FLASK_DEBUG = os.getenv('FLASK_DEBUG', default=EnvType.production)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
