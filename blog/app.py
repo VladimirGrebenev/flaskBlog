@@ -5,6 +5,7 @@ from blog.articles.views import articles_app
 from blog.auth.views import auth_app
 from werkzeug.security import generate_password_hash
 from blog.auth.views import login_manager
+from flask_migrate import Migrate
 import os
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
 app.config.from_object(f"blog.configs.{cfg_name}")
 
 db.init_app(app)
+migrate = Migrate(app, db, compare_type=True)
 login_manager.init_app(app)
 
 app.register_blueprint(user_app)
