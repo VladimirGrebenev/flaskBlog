@@ -15,4 +15,9 @@
             </li>
         </ul>
     {% endfor %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
 {% endblock %}

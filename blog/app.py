@@ -3,7 +3,6 @@ from blog.models.database import db
 from blog.user.views import user_app
 from blog.articles.views import articles_app
 from blog.auth.views import auth_app
-from werkzeug.security import generate_password_hash
 from blog.auth.views import login_manager
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
@@ -35,7 +34,7 @@ def index():
 
 
 # Commands
-@app.cli.command("create-users")
+@app.cli.command("create-admin")
 def create_admin():
     """
     Run in your terminal:
@@ -49,4 +48,3 @@ def create_admin():
     db.session.add(admin)
     db.session.commit()
     print("created admin:", admin)
-

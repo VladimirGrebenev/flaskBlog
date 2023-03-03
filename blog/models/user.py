@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     username = Column(String(80), unique=True, nullable=False)
     first_name = Column(String(120), unique=False, nullable=False, default="", server_default="")
     last_name = Column(String(120), unique=False, nullable=False, default="", server_default="")
-    email = Column(String(255), unique=True, nullable=False)
+    email = Column(String(255), unique=True, nullable=False, default="", server_default="")
     _password = Column(LargeBinary, nullable=True)
     is_staff = Column(Boolean, nullable=False, default=False)
 
