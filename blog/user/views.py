@@ -1,15 +1,9 @@
 from flask import Blueprint, render_template
-# from blog.articles.views import ARTICLES
 from blog.models import User
 from flask_login import login_required
 
 user_app = Blueprint('user_app', __name__, static_folder='../static', url_prefix='/users')
 
-# USERS = {
-#     1: {'first_name': 'Александр', 'last_name': 'Пушкин', 'birthday': '6 июня 1799 г.'},
-#     2: {'first_name': 'Михаил', 'last_name': 'Лермонтов', 'birthday': '15 октября 1814 г.'},
-#     3: {'first_name': 'Фёдор', 'last_name': 'Достоевский', 'birthday': '11 ноября 1821 г.'},
-# }
 
 @user_app.route('/')
 def user_list():
@@ -29,5 +23,4 @@ def user_profile(user_id: int):
     return render_template(
         'user/detail.html',
         user=user,
-        # articles=ARTICLES,
     )
