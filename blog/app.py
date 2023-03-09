@@ -1,12 +1,14 @@
 from flask import Flask, render_template
-from blog.models.database import db
-from blog.user.views import user_app
-from blog.articles.views import articles_app
-from blog.auth.views import auth_app
-from blog.auth.views import login_manager
 from flask_migrate import Migrate
 from blog.security import flask_bcrypt
 import os
+
+from blog.models.database import db
+from blog.user.views import user_app
+from blog.articles.views import articles_app
+from blog.auth.views import auth_app, login_manager
+from blog.authors.views import authors_app
+
 
 app = Flask(__name__)
 
@@ -25,6 +27,7 @@ login_manager.init_app(app)
 app.register_blueprint(user_app)
 app.register_blueprint(articles_app)
 app.register_blueprint(auth_app, url_prefix="/auth")
+app.register_blueprint(authors_app, url_prefix="/authors")
 
 
 # Route

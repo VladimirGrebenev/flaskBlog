@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Articles list
+    Articles list
 {% endblock %}
 
 {% block body %}
     <h1>Articles:</h1>
-    {% for articles_id in articles %}
+    <div>
         <ul>
-            <li><a href="{{ url_for('articles_app.get_article', pk=articles_id) }}">
-                {{ articles[articles_id]['title'] }} | {{ articles[articles_id]['author']['name'] }}</a></li>
+            {% for article in articles %}
+                <li>
+                    <a href="{{ url_for('articles_app.details', article_id=article.id) }}">{{ article.title }}</a>
+                    by {{ article.author.user.username }}
+                </li>
+            {% endfor %}
         </ul>
-    {% endfor  %}
+        <hr>
+        <a href="{{ url_for('articles_app.create') }}">Create new</a>
+    </div>
 {% endblock %}
