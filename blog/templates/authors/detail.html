@@ -1,27 +1,22 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    User #{{ user.id }}
+    Author #{{ author.user.username }}
 {% endblock %}
 
 {% block body %}
-    <h1 class="mt-5 mb-5">User detail:</h1>
+    <h1 class="mt-5 mb-5">Author detail:</h1>
     <div class="row">
         <div class="col-3">
-            <h5>Username:</h5>
-            <p>{{ user.username }}</p>
-        </div>
-        <div class="col-6">
-            <h5>Email:</h5>
-            <p>{{ user.email }}
-                {% if user.is_staff %}
-                    <span class="badge bg-secondary">staff</span>
-                {% endif %}</p>
+            <h5>Author:</h5>
+            <p>{{ author.user.username }}</p>
+            <p>{{ author.user.first_name }}</p>
+            <p>{{ author.user.last_name }}</p>
         </div>
     </div>
 
     {% if articles[0] %}
-        <div><h5>User Articles:</h5>
+        <div><h5>Author Articles:</h5>
             {% for article in articles %}
                 <ul>
                     <li><a href="{{ url_for('articles_app.details', article_id=article.id) }}">

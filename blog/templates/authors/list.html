@@ -3,13 +3,18 @@
     Authors list
 {% endblock %}
 {% block body %}
-    <h1>Authors</h1>
+    <h1 class="mt-5 mb-5">Authors</h1>
     <div>
         {% if authors %}
             <ul>
                 {% for author in authors %}
-                    <li>
-                        #{{ author.id }} ({{ author.user.username }})
+{#                    <li>#}
+{#                        #{{ author.id }} ({{ author.user.username }})#}
+{#                    </li>#}
+                    <li><a href="{{ url_for('authors_app.author_profile', author_id=author.id) }}">{{ author.user.username }}</a>
+                        {% if author.user.is_staff %}
+                            <span class="badge bg-secondary">staff</span>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>
