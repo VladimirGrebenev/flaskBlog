@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Articles list by tag {{ tag.name }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if tag.articles %}
+            <h1 class="mt-5 mb-5">Articles by tag: {{ tag.name }}</h1>
+            <ul>
+                {% for article in tag.articles %}
+                    <li>
+                        <a href="{{ url_for('articles_app.details', article_id=article.id) }}">{{ article.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

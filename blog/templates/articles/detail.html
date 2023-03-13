@@ -3,10 +3,24 @@
     Article #{{ article.id }}: {{ article.title }}
 {% endblock %}
 {% block body %}
-    <h1>{{ article.title }}</h1>
+    <h1 class="mt-5 mb-5">{{ article.title }}</h1>
     <div>
         <p>{{ article.body }}</p>
-        <div>Published {{ article.dt_created }}</div>
-        <div>by {{ article.author.user.username }}</div>
+        {% if article.tags %}
+            <div>Tags:</div>
+            <ul>
+                {% for tag in article.tags %}
+                    <li>
+                        <a href="{{ url_for('articles_app.list_by_tag', tag_id=tag.id) }}">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>Published {{ article.dt_created.strftime('%d, %b %Y') }}</div>
+        <div>
+            <a href="{{ url_for('user_app.user_profile', user_id=article.author_id) }}">
+                by {{ article.author.user.username }}</a>
+        </div>
+
     </div>
 {% endblock %}
