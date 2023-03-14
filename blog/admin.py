@@ -23,7 +23,7 @@ class MyAdminIndexView(AdminIndexView):
     def index(self):
         if not current_user.is_authenticated:
             return redirect(url_for("auth_app.login"))
-        elif not current_user.is_staff:
+        if not current_user.is_staff:
             error = 'this area is staff only'
             return redirect(url_for("index", error=error))
         return super(MyAdminIndexView, self).index()
