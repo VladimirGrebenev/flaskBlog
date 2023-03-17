@@ -8,6 +8,7 @@ from blog.user.views import user_app
 from blog.articles.views import articles_app
 from blog.auth.views import auth_app, login_manager
 from blog.authors.views import authors_app
+from blog.admin import admin_app
 
 
 app = Flask(__name__)
@@ -17,11 +18,12 @@ app = Flask(__name__)
 cfg_name = os.environ.get("CONFIG_NAME") or "ProductionConfig"
 app.config.from_object(f"blog.configs.{cfg_name}")
 
-# Init
+# Init apps
 flask_bcrypt.init_app(app)
 db.init_app(app)
 migrate = Migrate(app, db, compare_type=True)
 login_manager.init_app(app)
+admin_app.init_app(app)
 
 # register_blueprints
 app.register_blueprint(user_app)
