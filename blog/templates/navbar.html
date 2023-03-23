@@ -23,6 +23,7 @@
             </form>
             <div class="navbar-nav ms-auto">
                 {% if current_user.is_staff %}
+                    <a class="nav-link" href="{{ url_for('api-docs.openapi_swagger_ui') }}">Api Swagger</a>
                     <a class="nav-link" href="{{ url_for('admin.index') }}">Admin Panel</a>
                 {% endif %}
                 {% if current_user.is_authenticated %}
