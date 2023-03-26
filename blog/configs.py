@@ -8,7 +8,6 @@ load_dotenv(dotenv_path=dot_env)
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-
 class BaseConfig(object):
     DEBUG = False
     TESTING = False
