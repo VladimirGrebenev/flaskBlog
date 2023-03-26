@@ -43,7 +43,7 @@ pyembed-markdown==1.1.0
 Pygments==2.14.0
 pylint==2.16.4
 pymdown-extensions==9.10a3
-python-dotenv==1.0.0
+python-dotenv==0.21.1
 PyYAML==5.3.1
 requests==2.28.2
 simplejson==3.18.3
