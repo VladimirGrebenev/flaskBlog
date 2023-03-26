@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dot_env = BASE_DIR / ".env"
 load_dotenv(dotenv_path=dot_env)
 
+
 class BaseConfig(object):
     DEBUG = False
     TESTING = False
@@ -30,6 +31,7 @@ class DevConfig(BaseConfig):
 class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
     SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 class TestingConfig(BaseConfig):
     TESTING = True
