@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dot_env = BASE_DIR / ".env"
 load_dotenv(dotenv_path=dot_env)
 
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 class BaseConfig(object):
     DEBUG = False
