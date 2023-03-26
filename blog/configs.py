@@ -1,12 +1,17 @@
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+dot_env = BASE_DIR / ".env"
+load_dotenv(dotenv_path=dot_env)
 
 class BaseConfig(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = "abcdefg123456"
+    SECRET_KEY = os.getenv("SECRET_KEY")
     WTF_CSRF_ENABLED = True
     FLASK_ADMIN_SWATCH = 'cerulean'
     OPENAPI_URL_PREFIX = '/api/swagger'
@@ -24,7 +29,7 @@ class DevConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY")
 
 class TestingConfig(BaseConfig):
     TESTING = True
